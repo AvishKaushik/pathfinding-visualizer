@@ -163,28 +163,7 @@ export default class PathfindingVisualizer extends Component {
               );
               }
             }
-            else {
-              const newGrid = getNewGridWithWallToggledOff(this.state.grid, row, col);
-              document.getElementById(`node-${node.row}-${node.col}`).className =
-              'node';
-              this.setState({grid: newGrid});
-            return (
-              <Node
-              key={nodeIdx}
-              col={col}
-              isFinish={isFinish}
-              isStart={isStart}
-              isWall={false}
-              mouseIsPressed={mouseIsPressed}
-              onMouseDown={(row, col) => this.handleMouseDown(row, col)}
-              onMouseEnter={(row, col) =>
-                this.handleMouseEnter(row, col)
-              }
-              onMouseUp={() => this.handleMouseUp()}
-              row={row}></Node>
-            );
-            }
-          }, 10 * i);
+          }, 1 * i);
           })}
           </div>
         );
