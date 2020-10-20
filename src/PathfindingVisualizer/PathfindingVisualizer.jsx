@@ -80,6 +80,7 @@ export default class PathfindingVisualizer extends Component {
     this.setState(this.initialState);
     this.componentDidMount();
     let count=300;
+    let i=0;
     const {grid, mouseIsPressed} = this.state;
     return(
       <>
@@ -88,10 +89,14 @@ export default class PathfindingVisualizer extends Component {
         return (
           <div key={rowIdx}>
           {row.map((node, nodeIdx) => {
+              i+=1;
               const {row, col, isFinish, isStart, isWall} = node;
+              setTimeout(() => {
               if(row===0 || row==20 || col==0 || col==48)
               {
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+              document.getElementById(`node-${node.row}-${node.col}`).className =
+              'node node-mazecr';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -116,6 +121,8 @@ export default class PathfindingVisualizer extends Component {
               if(ch===1)
               {
                 const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-mazecr';
                 this.setState({grid: newGrid});
                 count-=1;
                 return (
@@ -136,6 +143,8 @@ export default class PathfindingVisualizer extends Component {
               }
               else {
                 const newGrid = getNewGridWithWallToggledOff(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node';
                 this.setState({grid: newGrid});
               return (
                 <Node
@@ -153,6 +162,7 @@ export default class PathfindingVisualizer extends Component {
                 row={row}></Node>
               );
               }
+            }, 10 * i);
             }
           })}
           </div>
