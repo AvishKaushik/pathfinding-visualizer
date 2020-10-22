@@ -126,7 +126,12 @@ transform: translateZ(0);
     background-color: rgba(17, 104, 217, 0.75);
   }
 
-  50% {
+  33% {
+    transform: scale(0.8);
+    background-color: rgba(0, 217, 18, 0.795);
+  }
+
+  66% {
     transform: scale(1.2);
     background-color: rgba(0, 217, 159, 0.75);
   }
