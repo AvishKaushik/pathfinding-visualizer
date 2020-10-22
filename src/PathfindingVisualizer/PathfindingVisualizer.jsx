@@ -17,8 +17,12 @@ export default class PathfindingVisualizer extends Component {
       mouseIsPressed: false,
     };
     this.state = this.initialState;
-
+    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
+
+  forceUpdateHandler(){
+    this.forceUpdate();
+  };
 
   componentDidMount() {
     const grid = getInitialGrid();
@@ -76,6 +80,93 @@ export default class PathfindingVisualizer extends Component {
   }
 
 
+  resetMaze() {
+    this.setState(this.initialState);
+    this.componentDidMount();
+    const {grid, mouseIsPressed} = this.state;
+    return(
+      <>
+      <div className="grid">
+      {grid.map((row, rowIdx) => {
+        return (
+          <div key={rowIdx}>
+          {row.map((node, nodeIdx) => {
+              const {row, col, isFinish, isStart, isWall} = node;
+                if(!((row==9 && col==15) || (row==9 && col==35)))
+                {
+                  const newGrid = getNewGridWithWallToggledOff(this.state.grid, row, col);
+                  document.getElementById(`node-${node.row}-${node.col}`).className =
+                  'node';
+                  this.setState({grid: newGrid});
+                  return (
+                  <Node
+                  key={nodeIdx}
+                  col={col}
+                  isFinish={isFinish}
+                  isStart={isStart}
+                  isWall={false}
+                  mouseIsPressed={mouseIsPressed}
+                  onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                  onMouseEnter={(row, col) =>
+                    this.handleMouseEnter(row, col)
+                  }
+                  onMouseUp={() => this.handleMouseUp()}
+                  row={row}></Node>
+                  );
+                }
+                else if(row==9 && col==15)
+                {
+                  const newGrid = getNewGridWithStart(this.state.grid, row, col);
+                  document.getElementById(`node-${node.row}-${node.col}`).className =
+                  'node node-start';
+                  this.setState({grid: newGrid});
+                  return (
+                  <Node
+                  key={nodeIdx}
+                  col={col}
+                  isFinish={isFinish}
+                  isStart={true}
+                  isWall={false}
+                  mouseIsPressed={mouseIsPressed}
+                  onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                  onMouseEnter={(row, col) =>
+                    this.handleMouseEnter(row, col)
+                  }
+                  onMouseUp={() => this.handleMouseUp()}
+                  row={row}></Node>
+                  );
+                }
+                else if(row==9 && col==35)
+                {
+                  const newGrid = getNewGridWithEnd(this.state.grid, row, col);
+                  document.getElementById(`node-${node.row}-${node.col}`).className =
+                  'node node-finish';
+                  this.setState({grid: newGrid});
+                  return (
+                  <Node
+                  key={nodeIdx}
+                  col={col}
+                  isFinish={true}
+                  isStart={isStart}
+                  isWall={false}
+                  mouseIsPressed={mouseIsPressed}
+                  onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                  onMouseEnter={(row, col) =>
+                    this.handleMouseEnter(row, col)
+                  }
+                  onMouseUp={() => this.handleMouseUp()}
+                  row={row}></Node>
+                  );
+                }
+              })}
+          </div>
+        );
+      })}
+      </div>
+      </>
+    )
+  }
+
   createRandomMaze() {
     this.setState(this.initialState);
     this.componentDidMount();
@@ -91,7 +182,7 @@ export default class PathfindingVisualizer extends Component {
           {row.map((node, nodeIdx) => {
               i+=1;
               const {row, col, isFinish, isStart, isWall} = node;
-              setTimeout(() => {
+              setInterval(() => {
               if(row===0 || row==20 || col==0 || col==48)
               {
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
@@ -389,8 +480,9 @@ export default class PathfindingVisualizer extends Component {
   }
 
   onResetClick() {
-        this.setState(this.initialState);
+        //document.getElementById("m").remove();
         this.componentDidMount();
+        this.forceUpdateHandler();
     }
 
   render() {
@@ -401,7 +493,7 @@ export default class PathfindingVisualizer extends Component {
       <button onClick={() => this.visualizeDijkstra()}>
       Visualize Dijkstra's Algorithm
       </button>
-      <button onClick={() => this.resetBoard()}>
+      <button onClick={() => this.resetMaze()}>
       Reset Board
       </button>
       <button onClick={() => this.createVerticalMaze()}>
@@ -413,10 +505,10 @@ export default class PathfindingVisualizer extends Component {
       <button onClick={() => this.createRandomMaze()}>
       Create Random Maze
       </button>
-      <div className="grid">
+      <div className="grid" id="m">
       {grid.map((row, rowIdx) => {
         return (
-          <div key={rowIdx}>
+          <div key={rowIdx} id="n">
           {row.map((node, nodeIdx) => {
             const {row, col, isFinish, isStart, isWall} = node;
             return (
@@ -499,6 +591,26 @@ const getNewGridWithWallToggledOff = (grid, row, col) => {
   return newGrid;
 };
 
+const getNewGridWithStart = (grid, row, col) => {
+  const newGrid = grid.slice();
+  const node = newGrid[row][col];
+  const newNode = {
+    ...node,
+    isStart: true,
+  };
+  newGrid[row][col] = newNode;
+  return newGrid;
+};
+const getNewGridWithEnd = (grid, row, col) => {
+  const newGrid = grid.slice();
+  const node = newGrid[row][col];
+  const newNode = {
+    ...node,
+    isFinish: true,
+  };
+  newGrid[row][col] = newNode;
+  return newGrid;
+};
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max-min+1) + min);
 }
