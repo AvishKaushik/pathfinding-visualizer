@@ -278,13 +278,16 @@ export default class PathfindingVisualizer extends Component {
   }
 
   rM() {
+    this.setState(this.state);
     this.resetMaze();
     const grid = getInitialGrid();
     this.setState({ grid });
-    this.setState(this.state);
   }
 
   createVerticalMaze() {
+    this.rM();
+    const grid1 = getInitialGrid();
+    this.setState({ grid1 });
     const {grid, mouseIsPressed} = this.state;
     return(
       <>
@@ -388,6 +391,9 @@ export default class PathfindingVisualizer extends Component {
   }
 
   createHorizontalMaze() {
+    this.rM();
+    const grid1 = getInitialGrid();
+    this.setState({ grid1 });
     const {grid, mouseIsPressed} = this.state;
     let i=1;
     return(
