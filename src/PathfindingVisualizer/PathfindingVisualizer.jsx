@@ -17,13 +17,7 @@ export default class PathfindingVisualizer extends Component {
       mouseIsPressed: false,
     };
     this.state = this.initialState;
-    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
   }
-
-  forceUpdateHandler(){
-    this.forceUpdate();
-  };
-
   componentDidMount() {
     const grid = getInitialGrid();
     this.setState({grid});
@@ -81,7 +75,6 @@ export default class PathfindingVisualizer extends Component {
 
 
   resetMaze() {
-    this.setState(this.initialState);
     this.componentDidMount();
     const {grid, mouseIsPressed} = this.state;
     return(
@@ -96,7 +89,8 @@ export default class PathfindingVisualizer extends Component {
                 {
                   const newGrid = getNewGridWithWallToggledOff(this.state.grid, row, col);
                   document.getElementById(`node-${node.row}-${node.col}`).className =
-                  'node';
+                    'node';
+                  this.setState(this.state);
                   this.setState({grid: newGrid});
                   return (
                   <Node
@@ -167,6 +161,7 @@ export default class PathfindingVisualizer extends Component {
     )
   }
 
+  
   createRandomMaze() {
     this.resetMaze();
     let count=300;
@@ -280,6 +275,13 @@ export default class PathfindingVisualizer extends Component {
       </div>
       </>
     )
+  }
+
+  rM() {
+    this.setState(this.state);
+    this.resetMaze();
+    const grid = getInitialGrid();
+    this.setState({ grid });
   }
 
   createVerticalMaze() {
@@ -500,7 +502,7 @@ export default class PathfindingVisualizer extends Component {
       <button onClick={() => this.visualizeDijkstra()}>
       Visualize Dijkstra's Algorithm
       </button>
-      <button onClick={() => this.resetMaze()}>
+      <button onClick={() => this.rM()}>
       Reset Board
       </button>
       <button onClick={() => this.createVerticalMaze()}>
