@@ -163,7 +163,7 @@ export default class PathfindingVisualizer extends Component {
 
   
   createRandomMaze() {
-    this.resetMaze();
+    this.rM();
     let count=300;
     let i=0;
     const {grid, mouseIsPressed} = this.state;
@@ -278,15 +278,13 @@ export default class PathfindingVisualizer extends Component {
   }
 
   rM() {
-    this.setState(this.state);
     this.resetMaze();
     const grid = getInitialGrid();
     this.setState({ grid });
+    this.setState(this.state);
   }
 
   createVerticalMaze() {
-    this.setState(this.initialState);
-    this.componentDidMount();
     const {grid, mouseIsPressed} = this.state;
     return(
       <>
@@ -390,7 +388,6 @@ export default class PathfindingVisualizer extends Component {
   }
 
   createHorizontalMaze() {
-    this.componentDidMount();
     const {grid, mouseIsPressed} = this.state;
     let i=1;
     return(
