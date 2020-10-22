@@ -268,6 +268,48 @@ export default class PathfindingVisualizer extends Component {
                     row={row}></Node>
                 );
               }
+              else if (row == 9 && col == 15) {
+                const newGrid = getNewGridWithStart(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                  'node node-start';
+                this.setState({ grid: newGrid });
+                return (
+                  <Node
+                    key={nodeIdx}
+                    col={col}
+                    isFinish={isFinish}
+                    isStart={isStart}
+                    isWall={false}
+                    mouseIsPressed={mouseIsPressed}
+                    onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                    onMouseEnter={(row, col) =>
+                      this.handleMouseEnter(row, col)
+                    }
+                    onMouseUp={() => this.handleMouseUp()}
+                    row={row}></Node>
+                );
+              }
+              else if (row == 9 && col == 35) {
+                const newGrid = getNewGridWithEnd(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                  'node node-finish';
+                this.setState({ grid: newGrid });
+                return (
+                  <Node
+                    key={nodeIdx}
+                    col={col}
+                    isFinish={isFinish}
+                    isStart={isStart}
+                    isWall={false}
+                    mouseIsPressed={mouseIsPressed}
+                    onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                    onMouseEnter={(row, col) =>
+                      this.handleMouseEnter(row, col)
+                    }
+                    onMouseUp={() => this.handleMouseUp()}
+                    row={row}></Node>
+                );
+              }
           })}
           </div>
         );
@@ -285,7 +327,6 @@ export default class PathfindingVisualizer extends Component {
   }
 
   createVerticalMaze() {
-    this.rM();
     const grid1 = getInitialGrid();
     this.setState({ grid1 });
     const {grid, mouseIsPressed} = this.state;
@@ -391,7 +432,6 @@ export default class PathfindingVisualizer extends Component {
   }
 
   createHorizontalMaze() {
-    this.rM();
     const grid1 = getInitialGrid();
     this.setState({ grid1 });
     const {grid, mouseIsPressed} = this.state;
@@ -574,6 +614,9 @@ const createNode = (col, row) => {
 const getNewGridWithWallToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
+  if (row == 9 && (col == 15 || col == 35)) {
+    return newGrid;
+  }
   const newNode = {
     ...node,
     isWall: !node.isWall,
