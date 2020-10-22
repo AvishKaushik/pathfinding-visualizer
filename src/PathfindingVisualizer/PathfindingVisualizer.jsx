@@ -168,8 +168,7 @@ export default class PathfindingVisualizer extends Component {
   }
 
   createRandomMaze() {
-    this.setState(this.initialState);
-    this.componentDidMount();
+    this.resetMaze();
     let count=300;
     let i=0;
     const {grid, mouseIsPressed} = this.state;
@@ -182,7 +181,6 @@ export default class PathfindingVisualizer extends Component {
           {row.map((node, nodeIdx) => {
               i+=1;
               const {row, col, isFinish, isStart, isWall} = node;
-              setInterval(() => {
               if(row===0 || row==20 || col==0 || col==48)
               {
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
@@ -254,7 +252,27 @@ export default class PathfindingVisualizer extends Component {
               );
               }
             }
-          }, 0.000001 * i);
+              else if (!((row == 9 && col == 15) || (row == 9 && col == 35)) && count <= 0){
+                const newGrid = getNewGridWithWallToggledOff(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                  'node';
+                this.setState({ grid: newGrid });
+                return (
+                  <Node
+                    key={nodeIdx}
+                    col={col}
+                    isFinish={isFinish}
+                    isStart={isStart}
+                    isWall={false}
+                    mouseIsPressed={mouseIsPressed}
+                    onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                    onMouseEnter={(row, col) =>
+                      this.handleMouseEnter(row, col)
+                    }
+                    onMouseUp={() => this.handleMouseUp()}
+                    row={row}></Node>
+                );
+              }
           })}
           </div>
         );
@@ -473,17 +491,6 @@ export default class PathfindingVisualizer extends Component {
       </>
     )
   }
-
-
-  resetBoard() {
-    window.location.reload(false);
-  }
-
-  onResetClick() {
-        //document.getElementById("m").remove();
-        this.componentDidMount();
-        this.forceUpdateHandler();
-    }
 
   render() {
     const {grid, mouseIsPressed} = this.state;

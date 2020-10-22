@@ -40,9 +40,11 @@
   animation-fill-mode: forwards;
   animation-play-state: running;
   background-color: white;
+  outline: 1px solid rgb(12, 53, 71);
 }
 
-@keyframes wallCreation {-webkit-transform: translateZ(0);
+@keyframes wallCreation {
+  -webkit-transform: translateZ(0);
 -moz-transform: translateZ(0);
 -ms-transform: translateZ(0);
 -o-transform: translateZ(0);
