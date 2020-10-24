@@ -56,16 +56,18 @@ export default class PathfindingVisualizer extends Component {
 
   animateShortestPath(nodesInShortestPathOrder) {
     document.getElementById(`node-${START_NODE_ROW}-${START_NODE_COL}`).className =
-      'node node-start';
-    for (let i = 1; i < nodesInShortestPathOrder.length-1; i++) {
+      'node node-initial-mark';
+    for (let i = 1; i < (nodesInShortestPathOrder.length-1); i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
         'node node-shortest-path';
       }, 50 * i);
+    } 
+    setTimeout(() => {
       document.getElementById(`node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`).className =
         'node node-final-mark';
-    }
+    }, 50 * (nodesInShortestPathOrder.length - 1));
   }
 
   visualizeDijkstra() {
@@ -75,8 +77,6 @@ export default class PathfindingVisualizer extends Component {
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
-    document.getElementById(`node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`).style.backgroundImage = "url('star.webp')";
-    document.getElementById(`node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`).style.backgroundSize = "25px 25px";
   }
 
 

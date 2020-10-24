@@ -15,11 +15,7 @@
   background-color: red;
 }
 
-.node-final-mark {
-  background: url("star.webp");
-  background-size: 25px 25px;
-  z-index: 1;
-}
+
 
 .node-start {
   background-color: green;
@@ -132,8 +128,6 @@ transform: translateZ(0);
   0% {
     transform: scale(0.6);
     background-color: rgba(17, 104, 217, 0.75);
-    background: url("star.webp");
-    background-size: 25px 25px;
     border-radius: 100%;
   }
 
@@ -150,5 +144,73 @@ transform: translateZ(0);
   100% {
     transform: scale(1);
     background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+.node-initial-mark {
+  animation-name: tform;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.node-final-mark {
+  animation-name: tformf;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes tform {
+  0% {
+    transform: scale(0.6);
+    background-color: green;
+    border-radius: 100%;
+  }
+
+  33% {
+    transform: scale(0.8);
+    background-color: green;
+  }
+
+  66% {
+    transform: scale(1.2);
+    background-color: green;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: green;
+  }
+}
+
+@keyframes tformf {
+  0% {
+    transform: scale(0.6);
+    background-color: red;
+    border-radius: 100%;
+  }
+
+  33% {
+    transform: scale(0.8);
+    background-color: red;
+  }
+
+  66% {
+    transform: scale(1.2);
+    background-color: red;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: red;
   }
 }
