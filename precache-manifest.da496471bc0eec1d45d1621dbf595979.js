@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "19cc4caa94818e712ab76b2d5966ecb9",
+    "revision": "f178cf3ab1942af244fa218035a6c203",
     "url": "/pathfinding-visualizer/index.html"
   },
   {
-    "revision": "b4a58dc060ddee713908",
-    "url": "/pathfinding-visualizer/static/css/main.bd38abcc.chunk.css"
+    "revision": "40e57c6e3cfe66c854f3",
+    "url": "/pathfinding-visualizer/static/css/main.a711759b.chunk.css"
   },
   {
     "revision": "4df17a8237ae63281059",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pathfinding-visualizer/static/js/2.2b89f690.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b4a58dc060ddee713908",
-    "url": "/pathfinding-visualizer/static/js/main.857155c4.chunk.js"
+    "revision": "40e57c6e3cfe66c854f3",
+    "url": "/pathfinding-visualizer/static/js/main.9cb14ae7.chunk.js"
   },
   {
     "revision": "a2b7021554e2339a14f1",
@@ -26,5 +26,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "5d5d9eefa31e5e13a6610d9fa7a283bb",
     "url": "/pathfinding-visualizer/static/media/logo.5d5d9eef.svg"
+  },
+  {
+    "revision": "f6d7cbfd16ab80b441025cb2781b240e",
+    "url": "/pathfinding-visualizer/static/media/star.f6d7cbfd.webp"
   }
 ]);
