@@ -47,11 +47,6 @@
 }
 
 @keyframes wallCreation {
-  -webkit-transform: translateZ(0);
--moz-transform: translateZ(0);
--ms-transform: translateZ(0);
--o-transform: translateZ(0);
-transform: translateZ(0);
   0% {
     transform: scale(0.5);
     background-color: rgb(12, 53, 71);
@@ -105,8 +100,8 @@ transform: translateZ(0);
   border: 1px solid rgb(12, 53, 71);
 }
 
-.node-shortest-path {
-  animation-name: shortestPath;
+.node-shortest-path-left {
+  animation-name: shortestPathLeft;
   animation-duration: 1.5s;
   animation-timing-function: ease-out;
   animation-delay: 0;
@@ -116,17 +111,112 @@ transform: translateZ(0);
   animation-play-state: running;
 }
 
-@keyframes shortestPath {
+@keyframes shortestPathLeft {
   0% {
     background-color: rgba(17, 104, 217, 0.75);
+    background-image: url('left.png');
+    background-repeat: no-repeat;
   }
 
   33% {
-    background-color: rgba(0, 217, 18, 0.795);
+    background-color: rgba(0, 190, 218, 0.75);
   }
 
   66% {
-    background-color: rgba(0, 217, 159, 0.75);
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+
+  100% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+.node-shortest-path-right {
+  animation-name: shortestPathRight;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes shortestPathRight {
+  0% {
+    background-color: rgba(17, 104, 217, 0.75);
+    background-image: url('right.png');
+  background-repeat: no-repeat;
+  }
+
+  33% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+
+  66% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+
+  100% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+.node-shortest-path-up {
+  animation-name: shortestPathUp;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes shortestPathUp {
+  0% {
+    background-color: rgba(17, 104, 217, 0.75);
+    background-image: url('up.png');
+  background-repeat: no-repeat;
+  }
+
+  33% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+
+  66% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+
+  100% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+}
+
+.node-shortest-path-down {
+  animation-name: shortestPathDown;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes shortestPathDown {
+  0% {
+    background-color: rgba(17, 104, 217, 0.75);
+    background-image: url('down.png');
+  background-repeat: no-repeat;
+  }
+
+  33% {
+    background-color: rgba(0, 190, 218, 0.75);
+  }
+
+  66% {
+    background-color: rgba(0, 190, 218, 0.75);
   }
 
   100% {
@@ -177,18 +267,26 @@ transform: translateZ(0);
 @keyframes tformf {
   0% {
     background-color: red;
+    background-image: url('wow.png');
+  background-repeat: no-repeat;
   }
 
   33% {
     transform: scale(0.8);
     background-color: red;
+    background-image: url('wow.png');
+  background-repeat: no-repeat;
   }
 
   66% {
     background-color: red;
+    background-image: url('wow.png');
+  background-repeat: no-repeat;
   }
 
   100% {
     background-color: red;
+    background-image: url('wow.png');
+  background-repeat: no-repeat;
   }
 }
