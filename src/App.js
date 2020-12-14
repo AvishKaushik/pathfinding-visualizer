@@ -4,6 +4,7 @@ import PathfindingVisualizer from './PathfindingVisualizer/PathfindingVisualizer
 import './App.css';
 
 function App() {
+  document.title="Pathfinding Visualizer"
   return (
     <div className="App">
       <PathfindingVisualizer></PathfindingVisualizer>

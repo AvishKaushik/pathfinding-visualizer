@@ -1,9 +1,9 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import './Node.css';
 
 export default class Node extends Component {
   render() {
-    const {
+    const { 
       col,
       isFinish,
       isStart,
@@ -12,14 +12,19 @@ export default class Node extends Component {
       onMouseEnter,
       onMouseUp,
       row,
+      direction,
+      totaldistance,
+      distance,
+      weight,
+      heuristicValue,
     } = this.props;
     const extraClassName = isFinish
       ? 'node-finish'
       : isStart
-      ? 'node-start'
-      : isWall
-      ? 'node-wall'
-      : '';
+        ? 'node-start'
+        : isWall
+          ? 'node-wall'
+          : '';
     return (
       <div
         id={`node-${row}-${col}`}

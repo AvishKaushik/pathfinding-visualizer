@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import Node from './Node/Node.jsx';
 import {dijkstra, getNodesInShortestPathOrderD} from '../algorithms/dijkstra';
-import {asearch} from '../algorithms/asearch';
+import {asearch, getNodesInShortestPathOrderA} from '../algorithms/asearch';
 
 import './PathfindingVisualizer.css';
 
@@ -40,6 +40,22 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
+        setTimeout(() => {
+          this.animateShortestPath(nodesInShortestPathOrder);
+        }, 10 * i);
+        return;
+      }
+      setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+        'node node-visited';
+      }, 10 * i);
+    }
+  }
+
+  animateAsearch(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -108,9 +124,16 @@ export default class PathfindingVisualizer extends Component {
     const {grid} = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visitedNodesInOrder = asearch(grid, startNode, finishNode);
-    console.log(visitedNodesInOrder);
+    const vnio=asearch(grid, startNode, finishNode);
+    for (let i = 0; i < vnio.length; i++) {
+      grid[vnio[i].row][vnio[i].col].distance=vnio[i].distance;
+    }
+    const nodesInShortestPathOrder = getNodesInShortestPathOrderA(grid,finishNode);
+    nodesInShortestPathOrder.reverse();
+    console.log(nodesInShortestPathOrder);
+    this.animateAsearch(vnio,nodesInShortestPathOrder);
   }
+
   resetMaze() {
     this.componentDidMount();
     const {grid, mouseIsPressed} = this.state;
@@ -645,10 +668,14 @@ const createNode = (col, row) => {
     row,
     isStart: row === START_NODE_ROW && col === START_NODE_COL,
     isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
-    distance: Infinity,
+    distance: -1,
     isVisited: false,
     isWall: false,
     previousNode: null,
+    direction: null,
+    totaldistance: 0,
+    weight: 0,
+    heuristicValue: Math.abs(row-FINISH_NODE_ROW) + Math.abs(col-FINISH_NODE_COL),
   };
 };
 const getNewGridWithWallToggled = (grid, row, col) => {
