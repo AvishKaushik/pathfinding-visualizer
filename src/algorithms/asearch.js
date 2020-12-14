@@ -348,16 +348,6 @@ export function asearch(grid, start, target) {
   return vnio;
 }
 
-
-//
-//
-//
-//
-//
-//
-//
-//
-
 export function getNodesInShortestPathOrderA(grid,finishNode) {
   let curr=finishNode;
   const sp=[];

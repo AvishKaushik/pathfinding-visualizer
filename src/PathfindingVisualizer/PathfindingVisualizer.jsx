@@ -60,14 +60,14 @@ export default class PathfindingVisualizer extends Component {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
+        }, 40 * i);
         return;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
         'node node-visited';
-      }, 10 * i);
+      }, 40 * i);
     }
   }
 
@@ -128,10 +128,19 @@ export default class PathfindingVisualizer extends Component {
     for (let i = 0; i < vnio.length; i++) {
       grid[vnio[i].row][vnio[i].col].distance=vnio[i].distance;
     }
-    const nodesInShortestPathOrder = getNodesInShortestPathOrderA(grid,finishNode);
-    nodesInShortestPathOrder.reverse();
-    console.log(nodesInShortestPathOrder);
-    this.animateAsearch(vnio,nodesInShortestPathOrder);
+    for(let i=0;i<=20;i++)
+    {
+      for(let j=0;j<=48;++j)
+      {
+        if(grid[i][j].distance==Infinity)
+        {
+          grid[i][j].distance=-1;
+        }
+      }
+    }
+    const sp = getNodesInShortestPathOrderA(grid,finishNode);
+    sp.reverse();
+    this.animateAsearch(vnio,sp);
   }
 
   resetMaze() {
@@ -668,7 +677,7 @@ const createNode = (col, row) => {
     row,
     isStart: row === START_NODE_ROW && col === START_NODE_COL,
     isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
-    distance: -1,
+    distance: Infinity,
     isVisited: false,
     isWall: false,
     previousNode: null,
