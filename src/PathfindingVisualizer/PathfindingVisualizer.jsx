@@ -73,10 +73,20 @@ export default class PathfindingVisualizer extends Component {
 
 
   animateShortestPath(nodesInShortestPathOrder) {
-    setTimeout(() => {
-    document.getElementById(`node-${START_NODE_ROW}-${START_NODE_COL}`).className =
-    'node node-initial-mark';
-    }, 50 * 0);
+    
+    if(nodesInShortestPathOrder.length<=1)
+    {
+      setTimeout(() => {
+        document.getElementById(`node-${START_NODE_ROW}-${START_NODE_COL}`).className = 
+        'node node-initial-mark-ca';
+      }, 50 * 0);
+    }
+    else {
+      setTimeout(() => {
+        document.getElementById(`node-${START_NODE_ROW}-${START_NODE_COL}`).className =
+        'node node-initial-mark';
+      }, 50 * 0);
+    }
     for (let i = 1; i < (nodesInShortestPathOrder.length-1); i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
@@ -106,16 +116,32 @@ export default class PathfindingVisualizer extends Component {
         }
       }, 50 * i);
     }
-    setTimeout(() => {
-      document.getElementById(`node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`).className =
-      'node node-final-mark';
-    }, 50 * (nodesInShortestPathOrder.length - 1));
+    if(nodesInShortestPathOrder.length<=1)
+    {
+      setTimeout(() => {
+        document.getElementById(`node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`).className = 
+        'node node-final-mark-nf';
+      }, 50 * 0);
+    }
+    else {
+      setTimeout(() => {
+        document.getElementById(`node-${FINISH_NODE_ROW}-${FINISH_NODE_COL}`).className = 
+        'node node-final-mark';
+      }, 50 * (nodesInShortestPathOrder.length - 1));
+    }
   }
 
   visualizeDijkstra() {
     const {grid} = this.state;
     const startNode = grid[START_NODE_ROW][START_NODE_COL];
     const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    for(let i=0;i<=20;i++)
+    {
+      for(let j=0;j<=48;++j)
+      {
+        grid[i][j].distance=Infinity;
+      }
+    }
     const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrderD(finishNode);
     this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
