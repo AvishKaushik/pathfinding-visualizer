@@ -73,8 +73,10 @@ export default class PathfindingVisualizer extends Component {
 
 
   animateShortestPath(nodesInShortestPathOrder) {
+    setTimeout(() => {
     document.getElementById(`node-${START_NODE_ROW}-${START_NODE_COL}`).className =
     'node node-initial-mark';
+    }, 50 * 0);
     for (let i = 1; i < (nodesInShortestPathOrder.length-1); i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
