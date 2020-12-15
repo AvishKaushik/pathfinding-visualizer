@@ -617,7 +617,7 @@ export default class PathfindingVisualizer extends Component {
       Visualize Dijkstra's Algorithm
       </button>
       <button onClick={() => this.visualizeASearch()}>
-      Visualize ASearch Algorithm
+      Visualize A*Search Algorithm
       </button>
       <button onClick={() => this.rM()}>
       Reset Board
