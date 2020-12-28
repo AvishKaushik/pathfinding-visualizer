@@ -95,13 +95,6 @@
 .node-wall {
   background-color: rgb(12, 53, 71);
   border: 1px solid rgb(12, 53, 71);
-  animation-name: example;
-  animation-duration: 0.25s;
-}
-
-@keyframes example {
-  0% {
-  }
 }
 
 .node-shortest-path-left {

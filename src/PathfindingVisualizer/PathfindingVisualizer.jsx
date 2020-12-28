@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import Node from './Node/Node.jsx';
 import {dijkstra, getNodesInShortestPathOrderD} from '../algorithms/dijkstra';
 import {asearch, getNodesInShortestPathOrderA} from '../algorithms/asearch';
+import {dfs, getNodesInShortestPathOrderDFS} from '../algorithms/dfs';
 
 import './PathfindingVisualizer.css';
 
@@ -57,6 +58,21 @@ export default class PathfindingVisualizer extends Component {
 
   animateAsearch(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length) {
+        setTimeout(() => {
+          this.animateShortestPath(nodesInShortestPathOrder);
+        }, 40 * i);
+        return;
+      }
+      setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+        'node node-visited';
+      }, 40 * i);
+    }
+  }
+  animateDFS(visitedNodesInOrder,nodesInShortestPathOrder) {
+    for (let i = 0; i <=visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animateShortestPath(nodesInShortestPathOrder);
@@ -169,6 +185,16 @@ export default class PathfindingVisualizer extends Component {
     const sp = getNodesInShortestPathOrderA(grid,finishNode);
     sp.reverse();
     this.animateAsearch(vnio,sp);
+  }
+
+  visualizeDFS() {
+    const {grid} = this.state;
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const vnio=dfs(grid, startNode, finishNode);
+    const sp=getNodesInShortestPathOrderDFS(grid, startNode, finishNode);
+    console.log(vnio,sp);
+    this.animateDFS(vnio,sp);
   }
 
   resetMaze() {
@@ -634,16 +660,38 @@ export default class PathfindingVisualizer extends Component {
     )
   }
 
+  startVisualization() {
+    if(this.refs.visualizationType.value==="Dijkstra")
+    {
+      this.visualizeDijkstra();
+    }
+    if(this.refs.visualizationType.value==="AStar")
+    {
+      this.visualizeASearch();
+    }
+    if(this.refs.visualizationType.value==="DFS")
+    {
+      this.visualizeDFS();
+    }
+    if(this.refs.visualizationType.value==="BFS")
+    {
+      this.visualizeDijkstra();
+    }
+  }
+
   render() {
     const {grid, mouseIsPressed} = this.state;
 
     return (
       <>
-      <button onClick={() => this.visualizeDijkstra()}>
-      Visualize Dijkstra's Algorithm
-      </button>
-      <button onClick={() => this.visualizeASearch()}>
-      Visualize A*Search Algorithm
+      <select ref="visualizationType">
+      <option value="Dijkstra">Dijkstra</option>
+      <option value="AStar">A* Search</option>
+      <option value="DFS">Depth First Search</option>
+      <option value="BFS">Breadth First Search</option>
+      </select>
+      <button onClick={()=>this.startVisualization()}>
+        Start Visualization
       </button>
       <button onClick={() => this.rM()}>
       Reset Board
