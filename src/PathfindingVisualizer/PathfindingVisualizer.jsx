@@ -41,6 +41,18 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    var btn3 = document.getElementById("btn3");
+    var btn4 = document.getElementById("btn4");
+    var btn5 = document.getElementById("btn5");
+    var btn6 = document.getElementById("btn6");
+    btn1.disabled = true;
+    btn2.disabled = true;
+    btn3.disabled = true;
+    btn4.disabled = true;
+    btn5.disabled = true;
+    btn6.disabled = true;
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -57,6 +69,18 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateAsearch(visitedNodesInOrder, nodesInShortestPathOrder) {
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    var btn3 = document.getElementById("btn3");
+    var btn4 = document.getElementById("btn4");
+    var btn5 = document.getElementById("btn5");
+    var btn6 = document.getElementById("btn6");
+    btn1.disabled = true;
+    btn2.disabled = true;
+    btn3.disabled = true;
+    btn4.disabled = true;
+    btn5.disabled = true;
+    btn6.disabled = true;
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -72,6 +96,18 @@ export default class PathfindingVisualizer extends Component {
     }
   }
   animateDFS(visitedNodesInOrder,nodesInShortestPathOrder) {
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    var btn3 = document.getElementById("btn3");
+    var btn4 = document.getElementById("btn4");
+    var btn5 = document.getElementById("btn5");
+    var btn6 = document.getElementById("btn6");
+    btn1.disabled = true;
+    btn2.disabled = true;
+    btn3.disabled = true;
+    btn4.disabled = true;
+    btn5.disabled = true;
+    btn6.disabled = true;
     for (let i = 0; i <=visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -145,6 +181,20 @@ export default class PathfindingVisualizer extends Component {
         'node node-final-mark';
       }, 50 * (nodesInShortestPathOrder.length - 1));
     }
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    var btn3 = document.getElementById("btn3");
+    var btn4 = document.getElementById("btn4");
+    var btn5 = document.getElementById("btn5");
+    var btn6 = document.getElementById("btn6");
+    setTimeout(() => {
+      btn1.disabled = false;
+      btn2.disabled = false;
+      btn3.disabled = false;
+      btn4.disabled = false;
+      btn5.disabled = false;
+      btn6.disabled = false;
+      }, 50 * (nodesInShortestPathOrder.length+3));
   }
 
   visualizeDijkstra() {
@@ -444,12 +494,17 @@ export default class PathfindingVisualizer extends Component {
 
   rM() {
     this.setState(this.state);
+    var id = window.setTimeout(function() {}, 0);
+    while (id--) {
+      window.clearTimeout(id); // will do nothing if no timeout with id is present
+    }
     this.resetMaze();
     const grid = getInitialGrid();
     this.setState({ grid });
   }
 
   createVerticalMaze() {
+    this.rM();
     const grid1 = getInitialGrid();
     this.setState({ grid1 });
     const {grid, mouseIsPressed} = this.state;
@@ -465,6 +520,8 @@ export default class PathfindingVisualizer extends Component {
             {
               console.log(col);
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-wall';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -486,6 +543,8 @@ export default class PathfindingVisualizer extends Component {
             {
               console.log(col);
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-wall';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -507,6 +566,8 @@ export default class PathfindingVisualizer extends Component {
             {
               console.log(col);
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-wall';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -524,10 +585,31 @@ export default class PathfindingVisualizer extends Component {
                 row={row}></Node>
               );
             }
-            else
+            else if(row==START_NODE_ROW && (col==START_NODE_COL || col===FINISH_NODE_COL))
             {
               console.log(col);
               const newGrid = getNewGridWithWallToggledOff(this.state.grid, row, col);
+              this.setState({grid: newGrid});
+              return (
+                <Node
+                key={nodeIdx}
+                col={col}
+                isFinish={isFinish}
+                isStart={isStart}
+                isWall={false}
+                mouseIsPressed={mouseIsPressed}
+                onMouseDown={(row, col) => this.handleMouseDown(row, col)}
+                onMouseEnter={(row, col) =>
+                  this.handleMouseEnter(row, col)
+                }
+                onMouseUp={() => this.handleMouseUp()}
+                row={row}></Node>
+              );
+            }
+            else{
+              const newGrid = getNewGridWithWallToggledOff(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -555,6 +637,7 @@ export default class PathfindingVisualizer extends Component {
   }
 
   createHorizontalMaze() {
+    this.rM();
     const grid1 = getInitialGrid();
     this.setState({ grid1 });
     const {grid, mouseIsPressed} = this.state;
@@ -571,6 +654,8 @@ export default class PathfindingVisualizer extends Component {
             {
               console.log(col);
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-mazecr';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -592,6 +677,8 @@ export default class PathfindingVisualizer extends Component {
             {
               console.log(col);
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-mazecr';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -613,6 +700,8 @@ export default class PathfindingVisualizer extends Component {
             {
               console.log(col);
               const newGrid = getNewGridWithWallToggledOn(this.state.grid, row, col);
+                document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-mazecr';
               this.setState({grid: newGrid});
               return (
                 <Node
@@ -684,25 +773,25 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-      <select ref="visualizationType">
+      <select ref="visualizationType" id="btn6">
       <option value="Dijkstra">Dijkstra</option>
       <option value="AStar">A* Search</option>
       <option value="DFS">Depth First Search</option>
       <option value="BFS">Breadth First Search</option>
       </select>
-      <button onClick={()=>this.startVisualization()}>
+      <button onClick={()=>this.startVisualization()} id="btn1">
         Start Visualization
       </button>
-      <button onClick={() => this.rM()}>
+      <button onClick={() => this.rM()} id="btn2">
       Reset Board
       </button>
-      <button onClick={() => this.createVerticalMaze()}>
+      <button onClick={() => this.createVerticalMaze()} id="btn3">
       Create Vertical Maze
       </button>
-      <button onClick={() => this.createHorizontalMaze()}>
+      <button onClick={() => this.createHorizontalMaze()} id="btn4">
       Create Horizontal Maze
       </button>
-      <button onClick={() => this.createRandomMaze()}>
+      <button onClick={() => this.createRandomMaze()} id="btn5">
       Create Random Maze
       </button>
       <div className="grid" id="m">
@@ -766,7 +855,7 @@ const createNode = (col, row) => {
 const getNewGridWithWallToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
-  if (row == 9 && (col == 15 || col == 35)) {
+  if (row == START_NODE_ROW && (col == START_NODE_COL || col == FINISH_NODE_COL)) {
     return newGrid;
   }
   const newNode = {
