@@ -498,9 +498,10 @@ export default class PathfindingVisualizer extends Component {
     while (id--) {
       window.clearTimeout(id); // will do nothing if no timeout with id is present
     }
+      window.clearTimeout(id);
     this.resetMaze();
     const grid = getInitialGrid();
-    this.setState({ grid });
+    this.setState({grid});
   }
 
   createVerticalMaze() {
