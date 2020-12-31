@@ -1,6 +1,17 @@
+body {
+  background-color: #eeecec;
+}
+
 .grid {
-  margin: 100px 0 0;
-  margin-top: 75px;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 35px;
+  background-color: #ffffff;
+  border: 6px solid rgb(12, 53, 71);
+  box-shadow: 5px 10px 10px #888888;
 }
 select {
   width: 170px;
@@ -12,5 +23,5 @@ button {
   width: 170px;
   margin: 4px;
   margin-top: 20px;
-  margin-bottom: -120px;
+  margin-bottom: 10px;
 }

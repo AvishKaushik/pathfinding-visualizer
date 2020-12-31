@@ -39,7 +39,7 @@ export default class PathfindingVisualizer extends Component {
   handleMouseUp() {
     this.setState({mouseIsPressed: false});
   }
-
+  
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
     var btn1 = document.getElementById("btn1");
     var btn2 = document.getElementById("btn2");
@@ -125,7 +125,6 @@ export default class PathfindingVisualizer extends Component {
 
 
   animateShortestPath(nodesInShortestPathOrder) {
-    
     if(nodesInShortestPathOrder.length<=1)
     {
       setTimeout(() => {
@@ -795,6 +794,7 @@ export default class PathfindingVisualizer extends Component {
       <button onClick={() => this.createRandomMaze()} id="btn5">
       Create Random Maze
       </button>
+      <hr></hr>
       <div className="grid" id="m">
       {grid.map((row, rowIdx) => {
         return (
@@ -822,6 +822,7 @@ export default class PathfindingVisualizer extends Component {
         );
       })}
       </div>
+      <hr></hr>
       </>
     );
   }
