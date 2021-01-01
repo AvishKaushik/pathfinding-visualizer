@@ -3,6 +3,7 @@ import Node from './Node/Node.jsx';
 import {dijkstra, getNodesInShortestPathOrderD} from '../algorithms/dijkstra';
 import {asearch, getNodesInShortestPathOrderA} from '../algorithms/asearch';
 import {dfs, getNodesInShortestPathOrderDFS} from '../algorithms/dfs';
+import { Button } from '@material-ui/core';
 
 import './PathfindingVisualizer.css';
 
@@ -10,6 +11,7 @@ const START_NODE_ROW = 9;
 const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 9;
 const FINISH_NODE_COL = 35;
+var yon=false;
 
 export default class PathfindingVisualizer extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ export default class PathfindingVisualizer extends Component {
     this.initialState = {
       grid: [],
       mouseIsPressed: false,
+      disabled: false,
     };
     this.state = this.initialState;
   }
@@ -41,18 +44,8 @@ export default class PathfindingVisualizer extends Component {
   }
   
   animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-    var btn1 = document.getElementById("btn1");
-    var btn2 = document.getElementById("btn2");
-    var btn3 = document.getElementById("btn3");
-    var btn4 = document.getElementById("btn4");
-    var btn5 = document.getElementById("btn5");
-    var btn6 = document.getElementById("btn6");
-    btn1.disabled = true;
-    btn2.disabled = true;
-    btn3.disabled = true;
-    btn4.disabled = true;
-    btn5.disabled = true;
-    btn6.disabled = true;
+    this.setState({disabled: !this.state.disabled});
+    yon=true
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -69,18 +62,7 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateAsearch(visitedNodesInOrder, nodesInShortestPathOrder) {
-    var btn1 = document.getElementById("btn1");
-    var btn2 = document.getElementById("btn2");
-    var btn3 = document.getElementById("btn3");
-    var btn4 = document.getElementById("btn4");
-    var btn5 = document.getElementById("btn5");
-    var btn6 = document.getElementById("btn6");
-    btn1.disabled = true;
-    btn2.disabled = true;
-    btn3.disabled = true;
-    btn4.disabled = true;
-    btn5.disabled = true;
-    btn6.disabled = true;
+    this.setState({disabled: true});
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -96,18 +78,7 @@ export default class PathfindingVisualizer extends Component {
     }
   }
   animateDFS(visitedNodesInOrder,nodesInShortestPathOrder) {
-    var btn1 = document.getElementById("btn1");
-    var btn2 = document.getElementById("btn2");
-    var btn3 = document.getElementById("btn3");
-    var btn4 = document.getElementById("btn4");
-    var btn5 = document.getElementById("btn5");
-    var btn6 = document.getElementById("btn6");
-    btn1.disabled = true;
-    btn2.disabled = true;
-    btn3.disabled = true;
-    btn4.disabled = true;
-    btn5.disabled = true;
-    btn6.disabled = true;
+    this.setState({disabled: !this.state.disabled});
     for (let i = 0; i <=visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -180,19 +151,8 @@ export default class PathfindingVisualizer extends Component {
         'node node-final-mark';
       }, 50 * (nodesInShortestPathOrder.length - 1));
     }
-    var btn1 = document.getElementById("btn1");
-    var btn2 = document.getElementById("btn2");
-    var btn3 = document.getElementById("btn3");
-    var btn4 = document.getElementById("btn4");
-    var btn5 = document.getElementById("btn5");
-    var btn6 = document.getElementById("btn6");
     setTimeout(() => {
-      btn1.disabled = false;
-      btn2.disabled = false;
-      btn3.disabled = false;
-      btn4.disabled = false;
-      btn5.disabled = false;
-      btn6.disabled = false;
+    this.setState({disabled: false});
       }, 50 * (nodesInShortestPathOrder.length+3));
   }
 
@@ -779,21 +739,21 @@ export default class PathfindingVisualizer extends Component {
       <option value="DFS">Depth First Search</option>
       <option value="BFS">Breadth First Search</option>
       </select>
-      <button onClick={()=>this.startVisualization()} id="btn1">
+      <Button variant="contained" size="small" disabled={this.state.disabled} color="#ffbf00" onClick={()=>this.startVisualization()} id="btn1">
         Start Visualization
-      </button>
-      <button onClick={() => this.rM()} id="btn2">
+      </Button>
+      <Button onClick={() => this.rM()} id="btn2">
       Reset Board
-      </button>
-      <button onClick={() => this.createVerticalMaze()} id="btn3">
+      </Button>
+      <Button onClick={() => this.createVerticalMaze()} id="btn3">
       Create Vertical Maze
-      </button>
-      <button onClick={() => this.createHorizontalMaze()} id="btn4">
+      </Button>
+      <Button onClick={() => this.createHorizontalMaze()} id="btn4">
       Create Horizontal Maze
-      </button>
-      <button onClick={() => this.createRandomMaze()} id="btn5">
+      </Button>
+      <Button onClick={() => this.createRandomMaze()} id="btn5">
       Create Random Maze
-      </button>
+      </Button>
       <hr></hr>
       <div className="grid" id="m">
       {grid.map((row, rowIdx) => {
