@@ -3,7 +3,7 @@ import Node from './Node/Node.jsx';
 import {dijkstra, getNodesInShortestPathOrderD} from '../algorithms/dijkstra';
 import {asearch, getNodesInShortestPathOrderA} from '../algorithms/asearch';
 import {dfs, getNodesInShortestPathOrderDFS} from '../algorithms/dfs';
-import { Button } from '@material-ui/core';
+import { Button, Select, MenuItem, InputLabel } from '@material-ui/core';
 
 import './PathfindingVisualizer.css';
 
@@ -733,25 +733,25 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-      <select ref="visualizationType" id="btn6">
+      <select labelId="label" ref="visualizationType" id="btn6" disabled={this.state.disabled} >
       <option value="Dijkstra">Dijkstra</option>
       <option value="AStar">A* Search</option>
       <option value="DFS">Depth First Search</option>
       <option value="BFS">Breadth First Search</option>
       </select>
-      <Button variant="contained" size="small" disabled={this.state.disabled} color="#ffbf00" onClick={()=>this.startVisualization()} id="btn1">
+      <Button variant="contained" size="small" disabled={this.state.disabled} onClick={()=>this.startVisualization()} id="btn1">
         Start Visualization
       </Button>
-      <Button onClick={() => this.rM()} id="btn2">
+      <Button variant="contained" size="small" disabled={this.state.disabled} onClick={() => this.rM()} id="btn2">
       Reset Board
       </Button>
-      <Button onClick={() => this.createVerticalMaze()} id="btn3">
+      <Button variant="contained" size="small" disabled={this.state.disabled} onClick={() => this.createVerticalMaze()} id="btn3">
       Create Vertical Maze
       </Button>
-      <Button onClick={() => this.createHorizontalMaze()} id="btn4">
+      <Button variant="contained" size="small" disabled={this.state.disabled} onClick={() => this.createHorizontalMaze()} id="btn4">
       Create Horizontal Maze
       </Button>
-      <Button onClick={() => this.createRandomMaze()} id="btn5">
+      <Button variant="contained" size="small" disabled={this.state.disabled} onClick={() => this.createRandomMaze()} id="btn5">
       Create Random Maze
       </Button>
       <hr></hr>

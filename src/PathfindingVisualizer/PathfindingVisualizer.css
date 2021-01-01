@@ -19,9 +19,40 @@ select {
   margin-top: 20px;
   margin-bottom: -120px;
 }
-button {
-  width: 170px;
-  margin: 4px;
+
+#btn1 {
+  width: 200px;
+  margin-left: 10px;
+  background-color: #ffbf00;
+  border: 2px solid rgb(12, 53, 71);
   margin-top: 20px;
-  margin-bottom: 10px;
+}
+
+#btn2 {
+  width: 200px;
+  margin-left: 10px;
+  background-color: #ffbf00;
+  border: 2px solid rgb(12, 53, 71);
+  margin-top: 20px;
+}
+#btn3 {
+  width: 200px;
+  margin-left: 10px;
+  background-color: #ffbf00;
+  border: 2px solid rgb(12, 53, 71);
+  margin-top: 20px;
+}
+#btn4 {
+  width: 220px;
+  margin-left: 10px;
+  background-color: #ffbf00;
+  border: 2px solid rgb(12, 53, 71);
+  margin-top: 20px;
+}
+#btn5 {
+  width: 200px;
+  margin-left: 10px;
+  background-color: #ffbf00;
+  border: 2px solid rgb(12, 53, 71);
+  margin-top: 20px;
 }
