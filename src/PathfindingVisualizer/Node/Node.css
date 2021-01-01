@@ -1,7 +1,18 @@
 .node {
   width: 25px;
   height: 25px;
-  margin-top: -1px;
+  margin-top: -2px;
+  margin-bottom: -5px;
+  margin-right: -1px;
+  background-color: white;
+  border: 1px solid rgb(164, 164, 160);
+  display: inline-block;
+  transition: all 0.25s linear;
+}
+.node:nth-child(2n + 50) {
+  width: 25px;
+  height: 25px;
+  margin-top: -10px;
   margin-bottom: -4px;
   margin-right: -1px;
   background-color: white;
@@ -9,7 +20,6 @@
   display: inline-block;
   transition: all 0.25s linear;
 }
-
 .node-finish {
   background-color: rgb(255, 0, 56);
 }

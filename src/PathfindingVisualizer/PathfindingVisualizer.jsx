@@ -3,7 +3,10 @@ import Node from './Node/Node.jsx';
 import {dijkstra, getNodesInShortestPathOrderD} from '../algorithms/dijkstra';
 import {asearch, getNodesInShortestPathOrderA} from '../algorithms/asearch';
 import {dfs, getNodesInShortestPathOrderDFS} from '../algorithms/dfs';
-import { Button, Select, MenuItem, InputLabel } from '@material-ui/core';
+import { Button} from '@material-ui/core';
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+import 'bootstrap-css-only/css/bootstrap.min.css'; 
+import 'mdbreact/dist/css/mdb.css';
 
 import './PathfindingVisualizer.css';
 
@@ -12,6 +15,8 @@ const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 9;
 const FINISH_NODE_COL = 35;
 var yon=false;
+var options=["DFS","Dijkstra"];
+var values=["DFS","Dijkstra"];
 
 export default class PathfindingVisualizer extends Component {
   constructor(props) {
@@ -733,7 +738,7 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-      <select labelId="label" ref="visualizationType" id="btn6" disabled={this.state.disabled} >
+      <select className="browser-default custom-select" ref="visualizationType" id="btn6" disabled={this.state.disabled} >
       <option value="Dijkstra">Dijkstra</option>
       <option value="AStar">A* Search</option>
       <option value="DFS">Depth First Search</option>
